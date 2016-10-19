@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button3)
     Button mClear;
 
+    boolean CUSTOM = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,35 +41,48 @@ public class MainActivity extends AppCompatActivity {
 
         mDefault.setOnClickListener(v -> {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                DatePickerDialog dlg = new DatePickerDialog(getBaseContext());
+                DatePickerDialog dlg = new DatePickerDialog(MainActivity.this);
                 dlg.setOnDateSetListener((view, year, month, dayOfMonth) -> {
                     Log.d(TAG, year + " " + month + " " + dayOfMonth);
                 });
                 dlg.show();
             } else {
-                DatePickerDlg dlg = new DatePickerDlg();
-                dlg.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
-                    Log.d(TAG, year + " " + monthOfYear + " " + dayOfMonth);
-                });
-                dlg.show(getSupportFragmentManager(), "datepicker");
+                if (!CUSTOM) {
+                    Calendar ca = Calendar.getInstance(Locale.getDefault());
+                    new DatePickerDialog(MainActivity.this, (view, year, month, dayOfMonth) -> {
+                        Log.d(TAG, year + " " + month + " " + dayOfMonth);
+                    }, ca.get(Calendar.YEAR), ca.get(Calendar.MONTH), ca.get(Calendar.DAY_OF_MONTH)).show();
+                } else {
+                    DatePickerDlg dlg = new DatePickerDlg();
+                    dlg.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
+                        Log.d(TAG, year + " " + monthOfYear + " " + dayOfMonth);
+                    });
+                    dlg.show(getSupportFragmentManager(), "datepicker");
+                }
             }
         });
 
         mDb.setOnClickListener(v -> {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                DatePickerDialog dlg = new DatePickerDialog(getBaseContext());
+                DatePickerDialog dlg = new DatePickerDialog(MainActivity.this);
                 dlg.updateDate(2014, 1, 4);
                 dlg.setOnDateSetListener((view, year, month, dayOfMonth) -> {
                     Log.d(TAG, year + " " + month + " " + dayOfMonth);
                 });
                 dlg.show();
             } else {
-                DatePickerDlg dlg = new DatePickerDlg();
-                dlg.updateDate(2014, 1, 4);
-                dlg.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
-                    Log.d(TAG, year + " " + monthOfYear + " " + dayOfMonth);
-                });
-                dlg.show(getSupportFragmentManager(), "datepicker");
+                if (!CUSTOM) {
+                    new DatePickerDialog(MainActivity.this, (view, year, month, dayOfMonth) -> {
+                        Log.d(TAG, year + " " + month + " " + dayOfMonth);
+                    }, 2011, 1, 1).show();
+                } else {
+                    DatePickerDlg dlg = new DatePickerDlg();
+                    dlg.updateDate(2014, 1, 4);
+                    dlg.setOnDateChangedListener((view, year, monthOfYear, dayOfMonth) -> {
+                        Log.d(TAG, year + " " + monthOfYear + " " + dayOfMonth);
+                    });
+                    dlg.show(getSupportFragmentManager(), "datepicker");
+                }
             }
         });
 

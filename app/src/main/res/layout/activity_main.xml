@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) Hanwha S&C Ltd., 2016. All rights reserved.
+  ~
+  ~ This software is covered by the license agreement between
+  ~ the end user and Hanwha S&C Ltd., and may be
+  ~ used and copied only in accordance with the terms of the
+  ~ said agreement.
+  ~
+  ~ Hanwha S&C Ltd., assumes no responsibility or
+  ~ liability for any errors or inaccuracies in this software,
+  ~ or any consequential, incidental or indirect damage arising
+  ~ out of the use of the software.
+  -->
+
+<RelativeLayout
+    android:id="@+id/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context="com.example.test_datepicker.MainActivity">
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button"
+        android:layout_alignBottom="@+id/button" android:layout_centerHorizontal="true"
+        android:text="Db"/>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" android:layout_marginLeft="19dp"
+        android:layout_marginStart="0dp" android:layout_marginTop="0dp"
+        android:text="Default"/>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" android:layout_alignTop="@+id/button2"
+        android:layout_marginEnd="11dp" android:layout_marginRight="11dp"
+        android:text="Clear"/>
+</RelativeLayout>
